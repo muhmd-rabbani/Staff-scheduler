@@ -16,6 +16,7 @@ import Viewshift from './Components/Admin/Viewshift'
 import Viewcomplaint from './Components/Admin/Viewcomplaint'
 import Response from './Components/manager/Response'
 import Dashboard from './Components/Admin/Dashboard'
+import Managerdashboard from './Components/manager/Managerdashboard'
 function App() {
 
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/viewcomplaint' element={<Viewcomplaint></Viewcomplaint>}></Route>
         <Route path='/response'element={<Response></Response>}></Route>
         <Route path='/dashboard' element={<Dashboard></Dashboard>}></Route>
+        <Route path='/dashboardm' element={<Managerdashboard/>}></Route>
       </Routes>
 
     </>

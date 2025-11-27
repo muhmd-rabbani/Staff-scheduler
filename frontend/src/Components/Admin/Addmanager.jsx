@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Addmanager.css'
 
 function Addmanager() {
+  const [name,setName]=useState("")
+  const [age,setAge]=useState("")
+  const [gender,setGender]=useState("")
+  const [phone,setPhone]=useState("")
+  const [Email,setEmail]=useState("")
+  const [qualification,setQualification]=useState("")
+  const [address,setAddress]=useState("")
+  const [state,setState]=useState("")
+  const [pincode,setPincode]=useState("")
+  const [password,setPassword]=useState("")
+  const [cpassword,setCpassword]=useState("")
+  console.log("name",name,"age",age,gender) 
   return (
     <div className='addmngr'>
         <form action="input" className='addmngr1'>
             <h1>Add Manager</h1>
             {/* Name */}
             <label htmlFor="name">Name:</label>
-            <input type="text"id='name'/><br /><br />
+            <input type="text"id='name' onChange={(e)=>{setName(e.target.value)}}/><br /><br />
             {/* age */}
             <label htmlFor="age">Age:</label>
-            <input type="text"id='age'/>
+            <input type="text"id='age' onChange={(e)=>{setAge(e.target.value)}} />
             {/* Gender */}
             <label htmlFor="gender">Gender:</label>
-            <select id='gender'>
+            <select id='gender'onChange={(e)=>{setGender(e.target.value)}} >
               <option value="">Select</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -23,7 +35,7 @@ function Addmanager() {
             <br /><br />
             {/* Phone no */}
             <label htmlFor="phnno">Phone no:</label>
-            <input type="text"id=''/><br /><br />
+            <input type="text"id='phn'onChange={(e)=>{setPhnno(e.target.value)}}/><br /><br />
             {/* Email */}
             <label htmlFor="email">E-mail:</label>
             <input type="text"id='email'/><br /><br />
