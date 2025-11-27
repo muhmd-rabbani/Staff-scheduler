@@ -1,0 +1,25 @@
+.hd1{
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(240,231,213);
+}
+.managerpage{
+    background-color: rgb(33,40,66);
+    border-radius: 10px;
+}
+.mainmanager{
+    background-color: rgb(240,231,213);
+    height: 100vh;
+}
+.my-table{
+    background-color: #e0f2f1;
+}
+.my-table td {
+  background-color: #ffffff;
+}
+.btm-1{
+    background-color: rgb(33,40,66);
+    justify-content: space-between;
+    text-align: end;
+}

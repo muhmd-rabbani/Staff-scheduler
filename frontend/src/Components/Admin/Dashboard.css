@@ -1,0 +1,24 @@
+.sidebar {
+  width: 220px;
+  background: linear-gradient(180deg, rgba(0,86,78,0.9), rgba(0,86,78,0.85));
+  color: #fff;
+  border-radius: calc(var(--radius) * 1);
+  padding: 20px;
+  box-shadow: 0 8px 30px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sidebar .brand h2 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.2px;
+  font-weight: 700;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

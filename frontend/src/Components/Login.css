@@ -1,0 +1,30 @@
+h1{
+    color: red;
+}
+.Login{
+    width: 300px ;
+    height: 250px;
+    padding: 20px;
+    margin: 100px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px blue;
+}
+.login1{
+    margin-top: 10px;
+    padding: 5px;
+}
+.log2{
+    width: 100px;
+    padding: 5px;
+    margin-top: 20px;
+    border: none;
+    background-color: greenyellow;
+}
+.log2:hover{
+background-color: rgb(223, 223, 210);
+border: 1px solid red;
+}
+.login1:focus{
+outline: none;
+}
