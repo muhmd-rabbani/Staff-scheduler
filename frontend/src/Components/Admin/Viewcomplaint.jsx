@@ -24,6 +24,7 @@ function Viewcomplaint() {
             <th>Against id</th>
             <th>Subject</th>
             <th>Description</th>
+            <th>Reply</th>
             <th></th>
           </tr>
         </thead>
@@ -33,6 +34,7 @@ function Viewcomplaint() {
             <td>1</td>
             <td>Mark</td>
             <td>Otto</td>
+            <td>reply</td>
             <td>
               <Button variant="primary" onClick={handleOpen}>
                 Reply
@@ -44,6 +46,7 @@ function Viewcomplaint() {
             <td>2</td>
             <td>Jacob</td>
             <td>Thornton</td>
+            <td>reply</td>
             <td>
               <Button variant="primary" onClick={handleOpen}>
                 Reply
@@ -55,6 +58,7 @@ function Viewcomplaint() {
             <td>3</td>
             <td>John</td>
             <td>Doe</td>
+            <td>reply</td>
             <td>
               <Button variant="primary" onClick={handleOpen}>
                 Reply

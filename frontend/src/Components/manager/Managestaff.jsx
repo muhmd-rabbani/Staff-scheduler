@@ -1,19 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Table from 'react-bootstrap/Table';
   // import './ManageManeger.css'
 import Button from 'react-bootstrap/Button';
 
 function Managestaff() {
+      const [showAddForm,setShowAddForm]=useState("")
   return (
     <div className='mainmanager  pt-4 '>
     <div className='container pt-4  managerpage pb-5' >
         <div className='d-flex btm-1'>
             <h1></h1>
-            <h1>Manage Staff</h1>
-        <button className='btn-1'>
+            <h1>Employees</h1>
+        <button className='btn-1' onClick={() => setShowAddForm(true)}>
         Add +
       </button>
         </div>
+
+        {/* RENDER ADD FORM INSTEAD OF TABLE */}
+        {showAddForm ? (
+          <Addmanager onClose={() => setShowAddForm(false)} />
+        ) :
       <Table striped bordered hover className='table my-table'>
       <thead>
         <tr>
@@ -48,7 +54,7 @@ function Managestaff() {
           <td>76809</td>
           <td>
             <Button variant="primary"className='me-2'>Edit</Button>
-            <Button variant="success">Delete</Button>
+            <Button variant="danger">Delete</Button>
           </td>
         </tr>
         <tr>
@@ -66,7 +72,7 @@ function Managestaff() {
           <td>76809</td>
           <td>
             <Button variant="primary"className='me-2'>Edit</Button>
-            <Button variant="success">Delete</Button>
+            <Button variant="danger">Delete</Button>
           </td>
         </tr>
         <tr>
@@ -84,11 +90,12 @@ function Managestaff() {
           <td>76809</td>
           <td>
             <Button variant="primary"className='me-2'>Edit</Button>
-            <Button variant="success">Delete</Button>
+            <Button variant="danger">Delete</Button>
           </td>
         </tr>
       </tbody>
     </Table>
+        }
     </div>
     </div>
   )

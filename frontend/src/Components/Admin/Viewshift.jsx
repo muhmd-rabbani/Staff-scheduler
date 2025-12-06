@@ -6,7 +6,7 @@ function Viewshift() {
         <div className='mainmanager pt-4'>
     <div className='container pt-4  managerpage pb-5' >
     <div>
-      <h1>View Shift</h1>
+      <h1>Shifts</h1>
     
       <table className="table table-bordered">
   <thead>

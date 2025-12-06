@@ -21,7 +21,6 @@ function Viewstaff() {
           <th>Adress</th>
           <th>State</th>
           <th>Pincode</th>
-          
         </tr>
       </thead>
       <tbody>

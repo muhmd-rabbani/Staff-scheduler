@@ -9,39 +9,39 @@ const StaffScheema=new Schema({
         type:String,
         required:true,
     },
-        Phoneno:{
+    Phoneno:{
         type:String,
         required:true,
     },
-        Email:{
+    Email:{
         type:String,
         required:true,
     },
-        Address:{
+    Address:{
         type:String,
         required:true,
     },
-        State:{
+    State:{
         type:String,
         required:true,
     },
-        Position:{
+    Position:{
         type:String,
         required:true,
     },
-        Pincode:{
+    Pincode:{
         type:String,
         required:true,
     },
-        Gender:{
+    Gender:{
         type:String,
         required:true,
     },
-        Qualification:{
+    Qualification:{
         type:String,
         required:true,
     },
-        department:{
+    department:{
         type:String,
         required:true,
     },

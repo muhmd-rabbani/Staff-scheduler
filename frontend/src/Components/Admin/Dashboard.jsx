@@ -1,70 +1,152 @@
-import React, { useState } from 'react';
-
-import './Dashboard.css';
-import ManageManeger from './ManageManeger';
-import Viewstaff from './Viewstaff';
-import Viewshift from './Viewshift';
-import Viewcomplaint from './Viewcomplaint';
+import React, { useState } from "react";
+import "./Dashboard.css";
+import ManageManeger from "./ManageManeger";
+import Viewstaff from "./Viewstaff";
+import Viewshift from "./Viewshift";
+import Viewcomplaint from "./Viewcomplaint";
 
 function Dashboard() {
-  // State to store currently active page
   const [active, setActive] = useState("dashboard");
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleCollapse = () => setCollapsed((s) => !s);
 
   return (
-    <div className=" dscontainer">
-      
-      {/* SIDEBAR */}
-      <div className="sidebar">
-        <div className="brand">
-          <h2>StaffScheduler</h2>
+    <div className={`ds-root ${collapsed ? "collapsed" : ""}`}>
+      <aside className="ds-sidebar">
+        <div className="ds-brand">
+          <div className="logo">SS</div>
+          <div className="brand-text">
+            <span>Staff</span>
+            <strong>Scheduler</strong>
+          </div>
         </div>
 
-        <div className="menu">
-          <div
-            className={`menu-item ${active === "dashboard" ? "active" : ""}`}
+        <div className="ds-search-wrap">
+          <input className="ds-search" placeholder="Search..." />
+        </div>
+
+        <nav className="ds-nav">
+          <button
+            className={`nav-item ${active === "dashboard" ? "active" : ""}`}
             onClick={() => setActive("dashboard")}
           >
             Dashboard
-          </div>
+          </button>
 
-          <div
-            className={`menu-item ${active === "managers" ? "active" : ""}`}
+          <button
+            className={`nav-item ${active === "managers" ? "active" : ""}`}
             onClick={() => setActive("managers")}
           >
             Managers
-          </div>
+          </button>
 
-          <div
-            className={`menu-item ${active === "staff" ? "active" : ""}`}
+          <button
+            className={`nav-item ${active === "staff" ? "active" : ""}`}
             onClick={() => setActive("staff")}
           >
             Staffs
-          </div>
+          </button>
 
-          <div
-            className={`menu-item ${active === "shifts" ? "active" : ""}`}
+          <button
+            className={`nav-item ${active === "shifts" ? "active" : ""}`}
             onClick={() => setActive("shifts")}
           >
             Shifts
-          </div>
+          </button>
 
-          <div
-            className={`menu-item ${active === "complaints" ? "active" : ""}`}
+          <button
+            className={`nav-item ${active === "complaints" ? "active" : ""}`}
             onClick={() => setActive("complaints")}
           >
             Complaints
-          </div>
-        </div>
-      </div>
+          </button>
+        </nav>
 
-      {/* MAIN CONTENT (Dynamic Rendering) */}
-      <div className="content">
-        {active === "dashboard" && <h1>Dashboard Overview</h1>}
-        {active === "managers" && <ManageManeger />}
-        {active === "staff" && <Viewstaff />}
-        {active === "shifts" && <Viewshift />}
-        {active === "complaints" && <Viewcomplaint />}
-      </div>
+        <div className="ds-footer">
+          <small>v1.0 • © Staff Scheduler</small>
+        </div>
+      </aside>
+
+      <main className="ds-main">
+        <header className="ds-topbar">
+          <div className="ds-top-left">
+            <button className="collapse-btn" onClick={toggleCollapse} aria-label="Toggle menu">
+              {/* <FiMenu /> */} ☰
+            </button>
+            <h1 className="page-title">{active === "dashboard" ? "Dashboard Overview" : active.charAt(0).toUpperCase() + active.slice(1)}</h1>
+          </div>
+
+          <div className="ds-top-right">
+            <button className="top-icon">Docs</button>
+            <button className="top-avatar">R</button>
+          </div>
+        </header>
+
+        <section className="ds-content">
+          {active === "dashboard" && (
+            <>
+              <div className="ds-cards">
+                <div className="card">
+                  <div className="card-title">Total Staff</div>
+                  <div className="card-value">128</div>
+                </div>
+
+                <div className="card">
+                  <div className="card-title">Active Shifts</div>
+                  <div className="card-value">8</div>
+                </div>
+
+                <div className="card">
+                  <div className="card-title">Open Complaints</div>
+                  <div className="card-value">4</div>
+                </div>
+
+                <div className="card">
+                  <div className="card-title">Managers</div>
+                  <div className="card-value">12</div>
+                </div>
+              </div>
+
+              <div className="ds-panel">
+                <h2>Recent Complaints</h2>
+                <table className="ds-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>From</th>
+                      <th>Subject</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#1001</td>
+                      <td>J. Mathew</td>
+                      <td>Shift swap request</td>
+                      <td><span className="status open">Open</span></td>
+                      <td>2025-11-28</td>
+                    </tr>
+                    <tr>
+                      <td>#1000</td>
+                      <td>S. George</td>
+                      <td>Late login</td>
+                      <td><span className="status closed">Closed</span></td>
+                      <td>2025-11-27</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+
+          {active === "managers" && <ManageManeger />}
+          {active === "staff" && <Viewstaff />}
+          {active === "shifts" && <Viewshift />}
+          {active === "complaints" && <Viewcomplaint />}
+        </section>
+      </main>
     </div>
   );
 }

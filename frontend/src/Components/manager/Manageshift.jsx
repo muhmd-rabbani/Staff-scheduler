@@ -5,7 +5,7 @@ function Manageshift() {
      <div className='mainmanager pt-4'>
     <div className='container pt-4  managerpage pb-5' >
     <div>
-      <h1>Manage Shift</h1>
+      <h1>Shifts</h1>
       <div className='d-flex btm-1'>
             <h1></h1>
         <button className='btn-1'>

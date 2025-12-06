@@ -13,7 +13,7 @@ function ManageManeger() {
       <div className='container pt-4 managerpage pb-5'>
 
         <div className='d-flex btm-1 justify-content-between'>
-          <h1 className='hd1'>Manage Managers</h1>
+          <h1 className='hd1'>Managers</h1>
 
           <button className='btn-1' onClick={() => setShowAddForm(true)}>
             Add
@@ -53,8 +53,8 @@ function ManageManeger() {
                 <td>Kerala</td>
                 <td>76809</td>
                 <td>
-                  <Button variant="primary" className='me-2'>Accept</Button>
-                  <Button variant="danger">Reject</Button>
+                  <Button variant="primary" className='me-2'>Edit</Button>
+                  <Button variant="danger">Delete</Button>
                 </td>
               </tr>
             </tbody>

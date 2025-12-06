@@ -1,73 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import "./Managerdashboard.css";
 
-import '../Admin/Dashboard.css';
-import Managestaff from './Managestaff';
-import Manageshift from './Manageshift';
-// import ManageManeger from './ManageManeger';
-// import Viewstaff from './Viewstaff';
-// import Viewshift from './Viewshift';
-// import Viewcomplaint from './Viewcomplaint';
+import Managestaff from "./Managestaff";
+import Manageshift from "./Manageshift";
 
-function Managerdashboard() {
-  // State to store currently active page
+function Dashboard() {
   const [active, setActive] = useState("dashboard");
 
   return (
-    <div className=" dscontainer">
+    <div className="simple-container">
       
-      {/* SIDEBAR */}
-      <div className="sidebar">
-        <div className="brand">
-          <h2>StaffScheduler</h2>
-        </div>
+      {/* LEFT MINI SIDEBAR */}
+      <aside className="simple-sidebar">
+        <h2 className="simple-logo">SS</h2>
 
-        <div className="menu">
-          <div
-            className={`menu-item ${active === "dashboard" ? "active" : ""}`}
+        <nav className="simple-menu">
+          <button
+            className={active === "dashboard" ? "active" : ""}
             onClick={() => setActive("dashboard")}
           >
             Dashboard
-          </div>
-
-          <div
-            className={`menu-item ${active === "managers" ? "active" : ""}`}
-            onClick={() => setActive("managers")}
-          >
-            Managers
-          </div>
-
-          <div
-            className={`menu-item ${active === "staff" ? "active" : ""}`}
+          </button>
+          <button
+            className={active === "staff" ? "active" : ""}
             onClick={() => setActive("staff")}
           >
-            Staffs
-          </div>
-
-          <div
-            className={`menu-item ${active === "shifts" ? "active" : ""}`}
+            Manage Staff
+          </button>
+          <button
+            className={active === "shifts" ? "active" : ""}
             onClick={() => setActive("shifts")}
           >
-            Shifts
-          </div>
+            Manage Shift
+          </button>
+        </nav>
+      </aside>
 
-          <div
-            className={`menu-item ${active === "complaints" ? "active" : ""}`}
-            onClick={() => setActive("complaints")}
-          >
-            Complaints
-          </div>
+      {/* MAIN SCREEN */}
+      <main className="simple-main">
+        <header className="simple-header">
+          <h1>
+            {active === "dashboard"
+              ? "Dashboard"
+              : active.charAt(0).toUpperCase() + active.slice(1)}
+          </h1>
+        </header>
+
+        <div className="simple-content">
+          {active === "dashboard" && (
+            <>
+              <div className="simple-cards">
+                <div className="simple-card">
+                  <p>Total Managers</p>
+                  <h3>12</h3>
+                </div>
+                <div className="simple-card">
+                  <p>Total Staff</p>
+                  <h3>128</h3>
+                </div>
+                <div className="simple-card">
+                  <p>Active Shifts</p>
+                  <h3>8</h3>
+                </div>
+                <div className="simple-card">
+                  <p>Open Complaints</p>
+                  <h3>4</h3>
+                </div>
+              </div>
+
+              <div className="simple-panel">
+                <h2>Recent Activity</h2>
+                <ul>
+                  <li>New shift added</li>
+                  <li>Manager updated</li>
+                  <li>Complaint resolved</li>
+                </ul>
+              </div>
+            </>
+          )}
+
+          {active === "staff" && <Managestaff />}
+          {active === "shifts" && <Manageshift />}
         </div>
-      </div>
-
-      {/* MAIN CONTENT (Dynamic Rendering) */}
-      <div className="content">
-        {active === "dashboard" && <h1>Dashboard Overview</h1>}
-        {active === "staff" && <Managestaff />}
-        {active === "shifts" && <Manageshift />}
-        {active === "complaints" && <Viewcomplaint />}
-      </div>
+      </main>
     </div>
   );
 }
 
-export default Managerdashboard;
+export default Dashboard;

@@ -38,19 +38,19 @@ function Addmanager() {
             <input type="text"id='phn'onChange={(e)=>{setPhnno(e.target.value)}}/><br /><br />
             {/* Email */}
             <label htmlFor="email">E-mail:</label>
-            <input type="text"id='email'/><br /><br />
+            <input type="text"id='email'onChange={(e)=>{setPhnno(e.target.value)}}/><br /><br />
             {/* quality */}
             <label htmlFor="quality">Qualification:</label>
-            <input type="text"id='quality'/><br /><br />
+            <input type="text"id='quality'onChange={(e)=>{setPhnno(e.target.value)}}/><br /><br />
             {/* adress */}
             <label htmlFor="adress">Adress:</label>
             <textarea id="address"></textarea><br /><br />
             {/* state */}
             <label htmlFor="state">State:</label>
-            <input type="text"id='state'/><br /><br />
+            <input type="text"id='state'onChange={(e)=>{setPhnno(e.target.value)}}/><br /><br />
             {/* pincode */}
             <label htmlFor="pincode">Pincode:</label>
-            <input type="text"id='pincode'/><br /><br />
+            <input type="text"id='pincode'onChange={(e)=>{setPhnno(e.target.value)}}/><br /><br />
              <label htmlFor="password">Password:</label>
             <input type="text"id=''/><br /><br />
              <label htmlFor="password">confirm password:</label>

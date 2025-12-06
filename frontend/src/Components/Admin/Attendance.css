@@ -1,0 +1,94 @@
+body {
+  background: #f5f9fc;
+  font-family: "Poppins", sans-serif;
+}
+
+.attendance-container {
+  width: 90%;
+  max-width: 1000px;
+  background: #fff;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.attendance-title {
+  text-align: center;
+  color: #0ea5a4;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+/* Filters */
+.filter-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.date-input,
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+.btn {
+  padding: 10px 18px;
+  background: #0ea5a4;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #0c8f90;
+}
+
+/* Table */
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendance-table th {
+  background: #e2f3f4;
+  padding: 12px;
+}
+
+.attendance-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Badges */
+.badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.present { background: #22c55e; }
+.absent { background: #ef4444; }
+.late { background: #f59e0b; }
+
+/* Edit Button */
+.small-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: none;
+  background: #3b82f6;
+  color: #fff;
+  cursor: pointer;
+}
+
+.small-btn:hover {
+  background: #2563eb;
+}
