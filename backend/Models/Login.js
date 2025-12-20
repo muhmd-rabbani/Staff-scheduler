@@ -10,7 +10,7 @@ const loginScheema=new Schema({
         required:true,
 
     },
-    role:{type:String,}
+    role:{type:String,required:true}
     
 })
 const loginData=mongoose.model("Login",loginScheema)

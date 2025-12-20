@@ -1,43 +1,43 @@
 import mongoose, { Schema } from "mongoose";
 
 const StaffScheema=new Schema({
-    Name:{
+    name:{
         type:String,
         required:true
     },
-    Age:{
+    age:{
         type:String,
         required:true,
     },
-    Phoneno:{
+    phoneno:{
         type:String,
         required:true,
     },
-    Email:{
+    email:{
         type:String,
         required:true,
     },
-    Address:{
+    address:{
         type:String,
         required:true,
     },
-    State:{
+    state:{
         type:String,
         required:true,
     },
-    Position:{
+    position:{
         type:String,
         required:true,
     },
-    Pincode:{
+    pincode:{
         type:String,
         required:true,
     },
-    Gender:{
+    gender:{
         type:String,
         required:true,
     },
-    Qualification:{
+    qualification:{
         type:String,
         required:true,
     },
@@ -45,6 +45,10 @@ const StaffScheema=new Schema({
         type:String,
         required:true,
     },
+    commonKey:{
+        type:Schema.Types.ObjectId,
+        ref:"Login"
+    }
     
 })
 const StaffData=mongoose.model("staff",StaffScheema)

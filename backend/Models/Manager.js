@@ -1,17 +1,52 @@
 import mongoose, { Schema } from "mongoose";
 
 const ManagerScheema=new Schema({
-    Name:{
+    name:{
         type:String,
         required:true
     },
-    password:{
+    age:{
         type:String,
         required:true,
-
     },
-    role:{type:String,}
-    
+    gender:{
+        type:String,
+        required:true,
+    },
+    phone:{
+        type:String,
+        required:true,
+    },
+    email:{
+        type:String,
+        required:true,
+    },
+    qualification:{
+        type:String,
+        required:true,
+    },
+    address:{
+        type:String,
+        required:true,
+    },
+    state:{
+        type:String,
+        required:true,
+    },
+    pincode:{
+        type:String,
+        required:true,
+    },
+    department:{
+        type:String,
+        required:true
+    },
+
+    commonKey:{
+        type:Schema.Types.ObjectId,
+        ref:"Login"
+    }
+
 })
-const loginData=mongoose.model("Login",loginScheema)
-export default loginData
+const ManagerData=mongoose.model("Manager",ManagerScheema)
+export default ManagerData

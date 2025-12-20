@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Managedepartment.css';
 import { Modal, Button, Form } from 'react-bootstrap';
+import api from '../../api';
 
 function Managedepartment() {
   const [showModal, setShowModal] = useState(false);
@@ -20,14 +21,31 @@ function Managedepartment() {
   const handleSubmit = () => {
     if (!deptName.trim()) return;
 
-    const newDept = {
-      id: departments.length + 1,
-      name: deptName,
-      staff: 0,
-    };
+    // const newDept = {
+    //   id: departments.length + 1,
+    //   name: deptName,
+    //   staff: 0,
+    // };
 
-    setDepartments([...departments, newDept]);
+    // setDepartments([...departments, newDept]);
+
+    const addDepartment=async()=>{
+      console.log(deptName);
+      
+      const body={deptName}
+      console.log(body);
+      
+      try {
+      let res=await  api.post('/admin/addDep',body)
+      console.log(res);
+      
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
     handleClose();
+    addDepartment()
   };
 
   return (
