@@ -19,6 +19,10 @@ import Dashboard from './Components/Admin/Dashboard'
 import Managerdashboard from './Components/manager/Managerdashboard'
 import Managedepartment from './Components/Admin/Managedepartment'
 import Attendance from './Components/Admin/Attendance'
+import EditManager from './Components/Admin/Editmanager'
+import Editmanager from './Components/Admin/Editmanager'
+import Profile from './Components/manager/Profile'
+
 function App() {
 
   return (
@@ -36,10 +40,12 @@ function App() {
         <Route path='/viewshift' element={<Viewshift></Viewshift>}></Route>
         <Route path='/viewcomplaint' element={<Viewcomplaint></Viewcomplaint>}></Route>
         <Route path='/response'element={<Response></Response>}></Route>
-        <Route path='/dashboard' element={<Dashboard></Dashboard>}></Route>
-        <Route path='/dashboardm' element={<Managerdashboard/>}></Route>
+        <Route path='/AdminHome' element={<Dashboard></Dashboard>}></Route>
+        <Route path='/managerHome' element={<Managerdashboard/>}></Route>
         <Route path='/managedepartment' element={<Managedepartment></Managedepartment>}></Route>
         <Route path='/attendance' element={<Attendance></Attendance>}></Route>
+        <Route path='/editmanager/:id' element={<Editmanager></Editmanager>}></Route>
+        <Route path='/profile' element={<Profile></Profile>}></Route>
       </Routes>
 
     </>

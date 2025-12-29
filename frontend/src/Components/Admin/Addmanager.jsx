@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Addmanager.css";
+import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import api from "../../api";
 
-function Addmanager() {
+function Addmanager({ onClose }) {
   const [departments, setDepartments] = useState([]);
 
   const [form, setForm] = useState({
@@ -17,223 +17,217 @@ function Addmanager() {
     pincode: "",
     department: "",
     password: "",
+    cpassword: "",
   });
 
-  // Handle input change
+  /* INPUT CHANGE */
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Fetch departments from backend
+  /* FETCH DEPARTMENTS */
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
         const res = await api.get("/admin/department");
         setDepartments(res.data);
-      } catch (error) {
-        console.log(error);
+      } catch {
         alert("Failed to load departments");
       }
     };
-
     fetchDepartments();
   }, []);
 
-  // Submit form
+  /* SUBMIT */
   const addmanager = async (e) => {
     e.preventDefault();
 
-    // Validation
-    if (!form.department) {
-      alert("Please select a department");
-      return;
-    }
-
-    if (form.password.length < 6) {
-      alert("Password must be at least 6 characters");
-      return;
-    }
-
-    if (form.password !== form.cpassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    if (
-      !form.name ||
-      !form.age ||
-      !form.gender ||
-      !form.phone ||
-      !form.email ||
-      !form.password
-    ) {
-      alert("Please fill all required fields");
-      return;
-    }
-
-    const body = {
-      name: form.name,
-      age: form.age,
-      gender: form.gender,
-      phone: form.phone,
-      email: form.email,
-      qualification: form.qualification,
-      address: form.address,
-      state: form.state,
-      pincode: form.pincode,
-      department: form.department,
-      password: form.password
-    };
+    if (!form.department) return alert("Select department");
+    if (form.password.length < 6) return alert("Password min 6 chars");
+    if (form.password !== form.cpassword) return alert("Passwords not matching");
 
     try {
-      await api.post("/Manager/addManager", body);
+      await api.post("/Manager/addManager", form);
       alert("Manager added successfully");
-
-      setForm({
-        name: "",
-        age: "",
-        gender: "",
-        phone: "",
-        email: "",
-        qualification: "",
-        address: "",
-        state: "",
-        pincode: "",
-        department: "",
-        password: "",
-        cpassword: ""
-      });
-    } catch (error) {
-      console.log(error);
+      onClose?.();
+    } catch {
       alert("Failed to add manager");
     }
   };
 
   return (
-    <div className="addmngr">
-      <form className="addmngr1" onSubmit={addmanager}>
-        <h1>Add Manager</h1>
+    <Row className="justify-content-center mt-4">
+      <Col xl={8} lg={9} md={10}>
+        <Card className="shadow-sm">
+          <Card.Body>
+            <h3 className="text-center mb-4">Add Manager</h3>
 
-        <div className="form-group">
-          <label>Name</label>
-          <input name="name" value={form.name} onChange={handleChange} />
-        </div>
+            <Form onSubmit={addmanager}>
+              {/* ROW 1 */}
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control name="name" onChange={handleChange} required />
+                  </Form.Group>
+                </Col>
 
-        <div className="row">
-          <div className="form-group">
-            <label>Age</label>
-            <input
-              type="number"
-              name="age"
-              value={form.age}
-              onChange={handleChange}
-            />
-          </div>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Age</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="age"
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-          <div className="form-group">
-            <label>Gender</label>
-            <select name="gender" value={form.gender} onChange={handleChange}>
-              <option value="">Select</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
+              {/* ROW 2 */}
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Gender</Form.Label>
+                    <Form.Select name="gender" onChange={handleChange} required>
+                      <option value="">Select</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Other</option>
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
 
-        <div className="form-group">
-          <label>Phone</label>
-          <input
-            type="number"
-            name="phone"
-            value={form.phone}
-            onChange={handleChange}
-          />
-        </div>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control name="phone" onChange={handleChange} required />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-          />
-        </div>
+              {/* ROW 3 */}
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
 
-        <div className="form-group">
-          <label>Qualification</label>
-          <input
-            name="qualification"
-            value={form.qualification}
-            onChange={handleChange}
-          />
-        </div>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Qualification</Form.Label>
+                    <Form.Control
+                      name="qualification"
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-        <div className="form-group">
-          <label>Address</label>
-          <textarea
-            name="address"
-            value={form.address}
-            onChange={handleChange}
-          />
-        </div>
+              {/* ROW 4 */}
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Address</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={2}
+                      name="address"
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-        <div className="form-group">
-          <label>State</label>
-          <input name="state" value={form.state} onChange={handleChange} />
-        </div>
+              {/* ROW 5 */}
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>State</Form.Label>
+                    <Form.Control name="state" onChange={handleChange} />
+                  </Form.Group>
+                </Col>
 
-        <div className="form-group">
-          <label>Pincode</label>
-          <input
-            type="number"
-            name="pincode"
-            value={form.pincode}
-            onChange={handleChange}
-          />
-        </div>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Pincode</Form.Label>
+                    <Form.Control name="pincode" onChange={handleChange} />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-        {/* Department Dropdown */}
-        <div className="form-group">
-          <label>Department</label>
-          <select
-            name="department"
-            value={form.department}
-            onChange={handleChange}
-          >
-            <option value="">Select Department</option>
-            {departments.map((dept) => (
-              <option key={dept._id} value={dept.DepartmentName}>
-                {dept.DepartmentName}
-              </option>
-            ))}
-          </select>
-        </div>
+              {/* ROW 6 */}
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Department</Form.Label>
+                    <Form.Select
+                      name="department"
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select Department</option>
+                      {departments.map((dept) => (
+                        <option key={dept._id} value={dept.DepartmentName}>
+                          {dept.DepartmentName}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+              </Row>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-          />
-        </div>
+              {/* ROW 7 */}
+              <Row>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="password"
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
 
-        <div className="form-group">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            name="cpassword"
-            value={form.cpassword}
-            onChange={handleChange}
-          />
-        </div>
+                <Col md={6}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="cpassword"
+                      onChange={handleChange}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-        <button type="submit">Add Manager</button>
-      </form>
-    </div>
+              {/* ACTIONS */}
+              <Row className="mt-4">
+                <Col className="d-flex justify-content-end gap-3">
+                  <Button variant="secondary" onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button type="submit" variant="primary">
+                    Add Manager
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
   );
 }
 

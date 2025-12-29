@@ -1,63 +1,10 @@
-// import React from 'react'
-
-// function Addstaff() {
-//   return (
-//     <div className=''>
-//         <form action="input" className='addmngr1'>
-//             <h1>Add a Staff</h1>
-//             {/* Name */}
-//             <label htmlFor="name">Name:</label>
-//             <input type="text"id='name'/><br /><br />
-//             {/* age */}
-//             <label htmlFor="age">Age:</label>
-//             <input type="text"id='age'/>
-//             {/* Gender */}
-//             <label htmlFor="gender">Gender:</label>
-//             <select id='gender'>
-//               <option value="">Select</option>
-//               <option value="male">Male</option>
-//               <option value="female">Female</option>
-//               <option value="other">Other</option>
-//             </select>
-//             <br /><br />
-//             {/* Phone no */}
-//             <label htmlFor="phnno">Phone no:</label>
-//             <input type="text"id=''/><br /><br />
-//             {/* Email */}
-//             <label htmlFor="email">E-mail:</label>
-//             <input type="text"id='email'/><br /><br />
-//             {/* quality */}
-//             <label htmlFor="quality">Qualification:</label>
-//             <input type="text"id='quality'/><br /><br />
-//             {/* department */}
-//             <label htmlFor="department">Department:</label>
-//             <input type="text"id='dept'/><br /><br />
-//             {/* position */}
-//             <label htmlFor="position">Position:</label>
-//             <input type="text"id='postn'/><br /><br />
-//             {/* adress */}
-//             <label htmlFor="adress">Adress:</label>
-//             <textarea id="address"></textarea><br /><br />
-//             {/* state */}
-//             <label htmlFor="state">State:</label>
-//             <input type="text"id='state'/><br /><br />
-//             {/* pincode */}
-//             <label htmlFor="pincode">Pincode:</label>
-//             <input type="text"id='pincode'/><br /><br />
-//             <button type='submit'>
-//               Submit
-//             </button>
-//         </form>
-//     </div>
-//   )
-// }
-
-// export default Addstaff
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import api from "../../api";
 
-function Addstaff() {
+function Addstaff({ onClose }) {
+  const [departments, setDepartments] = useState([]);
+
   const [form, setForm] = useState({
     name: "",
     age: "",
@@ -67,146 +14,206 @@ function Addstaff() {
     qualification: "",
     department: "",
     position: "",
-            password:"",
-
+    password: "",
     address: "",
     state: "",
     pincode: ""
   });
 
-  // handle input change
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // submit form
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const res = await api.get("/admin/department");
+        setDepartments(res.data);
+      } catch {
+        alert("Failed to load departments");
+      }
+    };
+    fetchDepartments();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !form.name ||
-      !form.age ||
-      !form.gender ||
-      !form.phone ||
-      !form.email
-    ) {
-      alert("Please fill all required fields");
-      return;
-    }
+    if (!form.department) return alert("Select department");
+    if (form.password.length < 6) return alert("Password too short");
 
     try {
-      await api.post("/staff/addStaff", form);
+      await api.post("/staffs/addStaffs", form);
       alert("Staff added successfully");
-
-      setForm({
-        name: "",
-        age: "",
-        gender: "",
-        phone: "",
-        email: "",
-        qualification: "",
-        department: "",
-        password:"",
-        position: "",
-        address: "",
-        state: "",
-        pincode: ""
-      });
-    } catch (error) {
-      console.log(error);
+      onClose();
+    } catch {
       alert("Failed to add staff");
     }
   };
-// console.log(form);
 
   return (
-    <div>
-      <form className="addmngr1" onSubmit={handleSubmit}>
-        <h1>Add a Staff</h1>
+    <Card className="shadow-sm">
+      <Card.Body>
+        <Card.Title className="mb-4">Add Staff</Card.Title>
 
-        <label>Name:</label>
-        <input name="name" value={form.name} onChange={handleChange} />
-        <br /><br />
+        <Form onSubmit={handleSubmit}>
+          <Row className="mb-3">
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  name="name"
+                  placeholder="Enter name"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
 
-        <label>Age:</label>
-        <input name="age" value={form.age} onChange={handleChange} />
-        <br /><br />
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Age</Form.Label>
+                <Form.Control
+                  name="age"
+                  placeholder="Enter age"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <label>Gender:</label>
-        <select name="gender" value={form.gender} onChange={handleChange}>
-          <option value="">Select</option>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
-        <br /><br />
+          <Row className="mb-3">
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Gender</Form.Label>
+                <Form.Select name="gender" onChange={handleChange}>
+                  <option value="">Select</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
 
-        <label>Phone:</label>
-        <input name="phone" value={form.phone} onChange={handleChange} />
-        <br /><br />
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Phone</Form.Label>
+                <Form.Control
+                  name="phone"
+                  placeholder="Phone number"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <label>Email:</label>
-        <input name="email" value={form.email} onChange={handleChange} />
-        <br /><br />
+          <Row className="mb-3">
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  name="email"
+                  type="email"
+                  placeholder="Email address"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
 
-        <label>Qualification:</label>
-        <input
-          name="qualification"
-          value={form.qualification}
-          onChange={handleChange}
-        />
-        <br /><br />
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Qualification</Form.Label>
+                <Form.Control
+                  name="qualification"
+                  placeholder="Qualification"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <label>Department:</label>
-        <input
-          name="department"
-          value={form.department}
-          onChange={handleChange}
-        />
-        <br /><br />
+          <Row className="mb-3">
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Department</Form.Label>
+                <Form.Select name="department" onChange={handleChange}>
+                  <option value="">Select Department</option>
+                  {departments.map((d) => (
+                    <option key={d._id} value={d.DepartmentName}>
+                      {d.DepartmentName}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            </Col>
 
-        <label>Position:</label>
-        <input
-          name="position"
-          value={form.position}
-          onChange={handleChange}
-        />
-        <br /><br />
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Position</Form.Label>
+                <Form.Control
+                  name="position"
+                  placeholder="Position"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <label>Address:</label>
-        <textarea
-          name="address"
-          value={form.address}
-          onChange={handleChange}
-        />
-        <br /><br />
+          <Form.Group className="mb-3">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={2}
+              name="address"
+              placeholder="Address"
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-          />
-        </div>
-        <br /><br />
+          <Row className="mb-3">
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
 
-        <label>State:</label>
-        <input name="state" value={form.state} onChange={handleChange} />
-        <br /><br />
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>State</Form.Label>
+                <Form.Control
+                  name="state"
+                  placeholder="State"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <label>Pincode:</label>
-        <input
-          name="pincode"
-          value={form.pincode}
-          onChange={handleChange}
-        />
-        <br /><br />
+          <Form.Group className="mb-4">
+            <Form.Label>Pincode</Form.Label>
+            <Form.Control
+              name="pincode"
+              placeholder="Pincode"
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+          <div className="d-flex justify-content-end gap-2">
+            <Button variant="secondary" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button type="submit" variant="primary">
+              Submit
+            </Button>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 }
 

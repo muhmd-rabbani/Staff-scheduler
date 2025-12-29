@@ -18,6 +18,22 @@ function Managedepartment() {
     setShowModal(false);
   };
 
+    // Fetch departments from backend
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const res = await api.get("/admin/department");
+        setDepartments(res.data);
+      } catch (error) {
+        console.log(error);
+        alert("Failed to load departments");
+      }
+    };
+
+    fetchDepartments();
+  }, []);
+
+
   const handleSubmit = () => {
     if (!deptName.trim()) return;
 

@@ -34,15 +34,24 @@ export const addstaff=async(req,res)=>{
         })
         await newstaff.save()
     
-        res.status(201).json({message:"manager registration successfull"},newstaff)
+        res.status(201).json({message:"staff registration successfull"},newstaff)
 }
     catch(error){
         console.log(error);
         
         res.status(500).json({message:"server error"})
         }
-
-
-
-
     }
+
+    /* =========================
+   GET ALL STAFFS
+========================= */
+
+    export const getallstaffs = async (req, res) => {
+  try {
+    const staffs = await StaffData.find();
+    res.status(200).json({ staffs });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch staffs" });
+  }
+};

@@ -1,0 +1,69 @@
+/* Page wrapper */
+.edit-manager-page {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* Card */
+.edit-manager-card {
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+/* Title */
+.edit-manager-title {
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Labels */
+.edit-manager-page .form-label {
+  font-weight: 500;
+  color: #444;
+}
+
+/* Inputs & select */
+.edit-manager-page .form-control,
+.edit-manager-page .form-select {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+/* Focus effect */
+.edit-manager-page .form-control:focus,
+.edit-manager-page .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
+
+/* Textarea */
+.edit-manager-page textarea.form-control {
+  resize: none;
+}
+
+/* Action buttons wrapper */
+.edit-manager-actions {
+  margin-top: 10px;
+}
+
+/* Buttons */
+.edit-manager-update-btn,
+.edit-manager-cancel-btn {
+  min-width: 120px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* Hover */
+.edit-manager-update-btn:hover,
+.edit-manager-cancel-btn:hover {
+  opacity: 0.9;
+}
+
+/* Loading text */
+.edit-manager-page .text-center {
+  font-size: 18px;
+  font-weight: 500;
+}

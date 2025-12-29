@@ -1,0 +1,75 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+
+
+/* App container */
+.app {
+  max-width: 390px;
+  margin: auto;
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* Header */
+.topbar {
+  background: #ff8a65;
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.icon {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Avatar */
+.avatar-section {
+  text-align: center;
+  padding: 25px 0 10px;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.change {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Form */
+.form {
+  padding: 10px 20px 30px;
+}
+
+.field {
+  margin-top: 18px;
+}
+
+.field label {
+  font-size: 13px;
+  color: #444;
+}
+
+.field input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 6px 0;
+  font-size: 14px;
+  outline: none;
+}
