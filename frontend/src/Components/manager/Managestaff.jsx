@@ -10,11 +10,22 @@ function Managestaff() {
   const [staffs, setStaffs] = useState([]);
   const [selectedStaff, setSelectedStaff] = useState(null);
 
+  /* =========================
+     FETCH STAFFS (BY MANAGER)
+  ========================= */
   const fetchStaffs = async () => {
     try {
-      const res = await api.get("/staff/staff");
+      const managerId = localStorage.getItem("managerId");
+
+      if (!managerId) {
+        alert("Manager not found");
+        return;
+      }
+
+      const res = await api.get(`/staffs/by-manager/${managerId}`);
       setStaffs(res.data.staffs);
     } catch (error) {
+      console.error(error);
       alert("Failed to load staffs");
     }
   };
@@ -23,8 +34,25 @@ function Managestaff() {
     fetchStaffs();
   }, []);
 
+  /* =========================
+     DELETE STAFF
+  ========================= */
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this staff?")) return;
+
+    try {
+      await api.delete(`/staffs/${id}`);
+      alert("Staff deleted successfully");
+      fetchStaffs();
+    } catch (error) {
+      console.error(error);
+      alert("Delete failed");
+    }
+  };
+
   return (
     <div className="manage-staff">
+      {/* HEADER */}
       <Row className="align-items-center mb-3">
         <Col>
           <h2>Employees</h2>
@@ -37,7 +65,7 @@ function Managestaff() {
         </Col>
       </Row>
 
-      {/* ADD STAFF */}
+      {/* ADD STAFF FORM */}
       {showAddForm && (
         <Addstaff
           onClose={() => {
@@ -56,7 +84,7 @@ function Managestaff() {
               <th>Name</th>
               <th>Qualification</th>
               <th>Position</th>
-              <th>Department</th>
+             
               <th>Age</th>
               <th>Gender</th>
               <th>Phone</th>
@@ -76,10 +104,10 @@ function Managestaff() {
                   <td>{staff.name}</td>
                   <td>{staff.qualification}</td>
                   <td>{staff.position}</td>
-                  <td>{staff.department}</td>
+                  
                   <td>{staff.age}</td>
                   <td>{staff.gender}</td>
-                  <td>{staff.phone}</td>
+                  <td>{staff.phoneno}</td>
                   <td>{staff.email}</td>
                   <td>{staff.address}</td>
                   <td>{staff.state}</td>
@@ -88,16 +116,20 @@ function Managestaff() {
                     <Button
                       size="sm"
                       variant="primary"
-                      className="me-2"
+                     
                       onClick={() => {
                         setSelectedStaff(staff);
                         setShowEdit(true);
                       }}
                     >
-                      Edit Staff
+                      Edit
                     </Button>
 
-                    <Button size="sm" variant="danger">
+                    <Button
+                      size="sm"
+                      variant="danger"
+                      onClick={() => handleDelete(staff._id)}
+                    >
                       Delete
                     </Button>
                   </td>

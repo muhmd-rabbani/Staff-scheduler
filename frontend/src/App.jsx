@@ -22,6 +22,7 @@ import Attendance from './Components/Admin/Attendance'
 import EditManager from './Components/Admin/Editmanager'
 import Editmanager from './Components/Admin/Editmanager'
 import Profile from './Components/manager/Profile'
+import Leaverequest from './Components/manager/Leaverequest'
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
         <Route path='/attendance' element={<Attendance></Attendance>}></Route>
         <Route path='/editmanager/:id' element={<Editmanager></Editmanager>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>
+        <Route path='/leaverequest'element={<Leaverequest></Leaverequest>}></Route>
       </Routes>
 
     </>

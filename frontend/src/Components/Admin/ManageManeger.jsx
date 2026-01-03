@@ -17,6 +17,8 @@ function ManageManeger() {
   const fetchManagers = async () => {
     try {
       const res = await api.get('/Manager/allmanagers');
+      console.log(res,'llllllll');
+      
       setManagers(res.data.managers);
     } catch (error) {
       console.log(error);
@@ -71,7 +73,6 @@ function ManageManeger() {
 </Button>
           )}
         </div>
-
         {/* ADD MANAGER */}
         {showAddForm && (
           <Addmanager

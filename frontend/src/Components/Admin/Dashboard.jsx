@@ -4,12 +4,18 @@ import ManageManeger from "./ManageManeger";
 import Viewstaff from "./Viewstaff";
 import Viewshift from "./Viewshift";
 import Viewcomplaint from "./Viewcomplaint";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [active, setActive] = useState("dashboard");
   const [collapsed, setCollapsed] = useState(false);
-
   const toggleCollapse = () => setCollapsed((s) => !s);
+  const navigate = useNavigate()
+  const handleLogout = () => {
+  localStorage.clear();
+  navigate('/')
+  
+}
 
   return (
     <div className={`ds-root ${collapsed ? "collapsed" : ""}`}>
@@ -61,6 +67,11 @@ function Dashboard() {
           >
             Complaints
           </button>
+          <button
+            className="nav-item"
+            onClick={handleLogout}>
+            Log out
+          </button>
         </nav>
 
         <div className="ds-footer">
@@ -93,7 +104,7 @@ function Dashboard() {
                 </div>
 
                 <div className="card">
-                  <div className="card-title">Active Shifts</div>
+                  <div className="card-title">Total departments</div>
                   <div className="card-value">8</div>
                 </div>
 

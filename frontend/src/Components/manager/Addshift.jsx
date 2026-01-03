@@ -1,69 +1,107 @@
 import React, { useState } from "react";
-import "./Addshift.css";
+import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import api from "../../api";
 
-function Addshift() {
-  const [shiftName, setShiftName] = useState("");
-  const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+function Addshift({ onClose }) {
+  const [form, setForm] = useState({
+    shiftName: "",
+    date: "",
+    startTime: "",
+    endTime: ""
+  });
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    try {
-      const body={ shiftName, date, startTime, endTime }
-      const res=await api.post("/shift/add",body)
-    } catch (error) {
-      
-    }
-    console.log({ shiftName, date, startTime, endTime });
-    alert("Shift Added Successfully");
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const departmentId = localStorage.getItem("departmentId");
+  if (!departmentId) {
+    alert("Department not found");
+    return;
+  }
+
+  try {
+    await api.post("/shift/add", {
+      ...form,
+      departmentId
+    });
+
+    alert("Shift Added Successfully");
+    onClose && onClose();
+  } catch (error) {
+    console.log(error);
+    alert("Failed to add shift");
+  }
+};
+
   return (
-    <div className="addshft">
-      <form className="addshft1" onSubmit={handleSubmit}>
-        <h1>Shifts</h1>
+    <Card className="shadow-sm">
+      <Card.Body>
+        <Card.Title className="mb-4">Add Shift</Card.Title>
 
-        <div className="form-group">
-          <label>Shift Name</label>
-          <input
-            type="text"
-            value={shiftName}
-            onChange={(e) => setShiftName(e.target.value)}
-          />
-        </div>
+        <Form onSubmit={handleSubmit} className="text-white">
+          <Row className="mb-3 ">
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Shift Name</Form.Label>
+                <Form.Control
+                  name="shiftName"
+                  placeholder="Enter shift name"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
 
-        <div className="form-group">
-          <label>Date</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="date"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <div className="form-group">
-          <label>Start Time</label>
-          <input
-            type="time"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-          />
-        </div>
+          <Row className="mb-4">
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Start Time</Form.Label>
+                <Form.Control
+                  type="time"
+                  name="startTime"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
 
-        <div className="form-group">
-          <label>End Time</label>
-          <input
-            type="time"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
-          />
-        </div>
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>End Time</Form.Label>
+                <Form.Control
+                  type="time"
+                  name="endTime"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+          <div className="d-flex justify-content-end gap-2">
+            <Button variant="secondary" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button type="submit" variant="primary">
+              Submit
+            </Button>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 }
 

@@ -10,24 +10,24 @@
 .ds-root {
   display: flex;
   min-height: 100vh;
-  background: #f4f7fb;
+  background: #cadcfc;
 }
 
 /* ===== SIDEBAR ===== */
 .ds-sidebar {
   width: 200px;
-  background: linear-gradient(180deg, #0f172a, #111827);
+  background: #00246B;
   color: #fff;
   display: flex;
   flex-direction: column;
   padding: 20px;
-position: fixed;        /* ✅ ADD */
-  left: 0;                /* ✅ ADD */
-  top: 0;                 /* ✅ ADD */
-  height: 100vh;          /* ✅ ADD */
+position: fixed;        
+  left: 0;                
+  top: 0;                 
+  height: 100vh;          
 
   transition: width 0.3s ease;
-  z-index: 1000;          /* ✅ ADD */
+  z-index: 1000;          
 }
 
 .ds-root.collapsed .ds-sidebar {
@@ -99,8 +99,9 @@ position: fixed;        /* ✅ ADD */
 }
 
 .nav-item.active {
-  background: #4f46e5;
-  color: #fff;
+  background: #fff;
+  color: black;
+  font-weight: bold;
 }
 
 /* FOOTER */
@@ -115,7 +116,7 @@ position: fixed;        /* ✅ ADD */
   flex: 1;
   padding: 24px;
 
-  margin-left: 200px;     /* ✅ ADD */
+  margin-left: 200px;     
   transition: margin-left 0.3s ease;
 }
 
@@ -186,14 +187,14 @@ position: fixed;        /* ✅ ADD */
 }
 
 .card {
-  background: #fff;
+  background: #00246B;
   border-radius: 18px;
   padding: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
 .card-title {
-  color: #6b7280;
+  color: #fff;
   font-size: 14px;
   margin-bottom: 8px;
 }
@@ -201,12 +202,12 @@ position: fixed;        /* ✅ ADD */
 .card-value {
   font-size: 28px;
   font-weight: 700;
-  color: #111827;
+  color: #fff;
 }
 
 /* ===== PANEL ===== */
 .ds-panel {
-  background: #fff;
+  background: #F8F9FA;
   border-radius: 18px;
   padding: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
@@ -226,13 +227,12 @@ position: fixed;        /* ✅ ADD */
 .ds-table th {
   text-align: left;
   padding: 12px;
-  font-size: 14px;
-  color: #6b7280;
+  font-size: 18px;
 }
 
 .ds-table td {
   padding: 12px;
-  font-size: 14px;
+  font-size: 16px;
   border-top: 1px solid #e5e7eb;
 }
 

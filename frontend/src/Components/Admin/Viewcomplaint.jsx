@@ -15,89 +15,95 @@ function Viewcomplaint() {
   };
 
   return (
-    <div>
-      <h1>Complaints</h1>
+    <div className="mainmanager pt-4">
+      <div className="container pt-4 managerpage pb-5">
 
-      <table className="table table-bordered">
-        <thead>
-          <tr>
-            <th>Against id</th>
-            <th>Subject</th>
-            <th>Description</th>
-            <th>Reply</th>
-            <th></th>
-          </tr>
-        </thead>
+        {/* HEADER */}
+        <h1 className="hd1">Complaints</h1>
 
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>reply</td>
-            <td>
-              <Button variant="primary" onClick={handleOpen}>
-                Reply
-              </Button>
-            </td>
-          </tr>
+        {/* TABLE */}
+        <table className="table my-table mt-4">
+          <thead>
+            <tr>
+              <th scope="col">Against ID</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Description</th>
+              <th scope="col">Reply</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
 
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>reply</td>
-            <td>
-              <Button variant="primary" onClick={handleOpen}>
-                Reply
-              </Button>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>reply</td>
+              <td>
+                <Button variant="primary" onClick={handleOpen}>
+                  Reply
+                </Button>
+              </td>
+            </tr>
 
-          <tr>
-            <td>3</td>
-            <td>John</td>
-            <td>Doe</td>
-            <td>reply</td>
-            <td>
-              <Button variant="primary" onClick={handleOpen}>
-                Reply
-              </Button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+              <td>2</td>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>reply</td>
+              <td>
+                <Button variant="primary" onClick={handleOpen}>
+                  Reply
+                </Button>
+              </td>
+            </tr>
 
-      {/* REPLY MODAL */}
-      <Modal show={showModal} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Reply to Complaint</Modal.Title>
-        </Modal.Header>
+            <tr>
+              <td>3</td>
+              <td>John</td>
+              <td>Doe</td>
+              <td>reply</td>
+              <td>
+                <Button variant="primary" onClick={handleOpen}>
+                  Reply
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <Modal.Body>
-          <Form>
-            <Form.Group>
-              <Form.Label>Your Message</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={4}
-                value={replyText}
-                onChange={(e) => setReplyText(e.target.value)}
-                placeholder="Enter your reply..."
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
+        {/* MODAL */}
+        <Modal show={showModal} onHide={handleClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Reply to Complaint</Modal.Title>
+          </Modal.Header>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="success" onClick={handleSubmit}>
-            Send Reply
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          <Modal.Body>
+            <Form>
+              <Form.Group>
+                <Form.Label>Your Message</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={4}
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                  placeholder="Enter your reply..."
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="success" onClick={handleSubmit}>
+              Send Reply
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+      </div>
     </div>
   );
 }

@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(cors({origin:'*'}))
 app.use("/api/admin",adminRoute)
 app.use("/api/Manager",managerRoute)
-app.use("/api/staff",staffRoute)
+app.use("/api/staffs",staffRoute)
 app.use("/api/login",authRoute)
 app.use("/api/shift",shiftRoute)
 

@@ -23,11 +23,12 @@ function EditStaff({ show, onHide, staff, onUpdated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await api.put(`/staffs/updateStaff/${staff._id}`, form);
+    await api.put(`/Manager/updateStaff/${staff._id}`, form);
     alert("Staff updated successfully");
     onUpdated();
     onHide();
   };
+// console.log(form);
 
   return (
     <Modal show={show} onHide={onHide} centered size="lg">
@@ -72,7 +73,7 @@ function EditStaff({ show, onHide, staff, onUpdated }) {
             <Col md={6}>
               <Form.Control
                 name="phone"
-                value={form.phone || ""}
+                value={form.phoneno || ""}
                 onChange={handleChange}
                 placeholder="Phone"
               />
@@ -86,6 +87,7 @@ function EditStaff({ show, onHide, staff, onUpdated }) {
                 value={form.email || ""}
                 onChange={handleChange}
                 placeholder="Email"
+                readOnly
               />
             </Col>
             <Col md={6}>

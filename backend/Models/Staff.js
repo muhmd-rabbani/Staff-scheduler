@@ -42,8 +42,9 @@ const StaffScheema=new Schema({
         required:true,
     },
     department:{
-        type:String,
+        type:Schema.Types.ObjectId,
         required:true,
+        ref:"Department"
     },
     commonKey:{
         type:Schema.Types.ObjectId,

@@ -38,8 +38,9 @@ const ManagerScheema=new Schema({
         required:true,
     },
     department:{
-        type:String,
-        required:true
+      type:Schema.Types.ObjectId,
+        required:true,
+        ref:"Department"
     },
 
     commonKey:{

@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react'
 import Table from 'react-bootstrap/Table';
-  // import './ManageManeger.css'
 import Button from 'react-bootstrap/Button';
 
 import api from '../../api';
@@ -10,7 +9,7 @@ function Viewstaff() {
       const [staffs, setStaffs] = useState([]);
       const fetchStaffs = async () => {
     try {
-      const res = await api.get('/staff/staff');
+      const res = await api.get('/staffs/staff');
       console.log(res);
       
       setStaffs(res.data.staffs);
@@ -29,7 +28,7 @@ function Viewstaff() {
     <div className='container pt-4  managerpage pb-5' >
         <div className='d-flex btm-1'>
             <h1></h1>
-            <h1>Employees</h1>
+            <h1 className="hd1">Employees</h1>
      
         </div>
 
@@ -59,7 +58,7 @@ function Viewstaff() {
       <td>{staff.name}</td>
       <td>{staff.qualification}</td>
       <td>{staff.position}</td>
-      <td>{staff.department}</td>
+      <td>{staff.department?.DepartmentName}</td>
       <td>{staff.age}</td>
       <td>{staff.gender}</td>
       <td>{staff.phoneno}</td>

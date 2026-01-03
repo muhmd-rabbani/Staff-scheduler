@@ -1,69 +1,56 @@
-.addmngr {
+/* Wrapper */
+.manager-wrapper {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Container */
+.manager-container {
+  max-width: 1100px;
+}
+
+/* Title */
+.manager-title {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+}
+
+/* Form Section */
+.manager-form-section {
   display: flex;
   justify-content: center;
-  align-items: center;
-
-  /* FIX FOR TOP GREEN BAR */
-  min-height: calc(100vh - 60px);
-  margin-top: 60px;
-
-  background: #c46bcf;
 }
 
-.addmngr1 {
-  width: 420px;
-  padding: 25px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+/* Card */
+.manager-card {
+  background-color: #ffffff;
+  border-radius: 14px;
 }
 
-.addmngr1 h1 {
-  text-align: center;
-  color: blue;
-  margin-bottom: 20px;
+/* Rows */
+.manager-row {
+  margin-bottom: 8px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 14px;
+/* Form Fields */
+.manager-field label {
+  font-weight: 600;
+  color: #00246B;
 }
 
-.form-group label {
-  font-weight: 500;
-  margin-bottom: 4px;
+/* Actions */
+.manager-actions button {
+  min-width: 140px;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #aaa;
+/* Optional Table Style (renamed) */
+.manager-table {
+  background-color: #cadcfc;
 }
 
-textarea {
-  resize: none;
-  height: 80px;
-}
-
-.row {
-  display: flex;
-  gap: 12px;
-}
-
-.row .form-group {
-  flex: 1;
-}
-
-button {
-  width: 100px;
-  padding: 12px;
-  background: #009688;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
+.manager-table td {
+  background-color: #cadcfc;
 }
