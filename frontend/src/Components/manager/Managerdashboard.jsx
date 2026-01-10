@@ -3,13 +3,12 @@ import "./Managerdashboard.css";
 
 import Managestaff from "./Managestaff";
 import Manageshift from "./Manageshift";
+import Addshift from "./Addshift";
 import AssignShift from "./AssignShift";
-import Viewcomplaint from "./Viewcomplaint";
-
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
 
-function Managerdashboard() {
+function Dashboard() {
   const [active, setActive] = useState("dashboard");
   const [managerName, setManagerName] = useState("");
   const navigate = useNavigate();
@@ -23,10 +22,22 @@ function Managerdashboard() {
     const fetchManager = async () => {
       try {
         const loginId = localStorage.getItem("loginId");
+        if (!loginId) {
+          alert("Login required");
+          return;
+        }
+
         const res = await api.get(`/Manager/bylogin/${loginId}`);
+
+        // store only IDs
+        localStorage.setItem("managerId", res.data._id);
+        localStorage.setItem("departmentId", res.data.department);
+
+        // keep name in state
         setManagerName(res.data.name);
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.log(error);
+        alert("Failed to load manager data");
       }
     };
 
@@ -34,12 +45,12 @@ function Managerdashboard() {
   }, []);
 
   return (
-    <div className="manager-container">
-      {/* SIDEBAR */}
-      <aside className="manager-sidebar">
-        <h2 className="manager-logo">Manager</h2>
+    <div className="simple-container">
+      {/* LEFT SIDEBAR */}
+      <aside className="simple-sidebar">
+        <h2 className="simple-logo">Manager</h2>
 
-        <nav className="manager-menu">
+        <nav className="simple-menu">
           <button
             className={active === "dashboard" ? "active" : ""}
             onClick={() => setActive("dashboard")}
@@ -79,39 +90,43 @@ function Managerdashboard() {
         </nav>
       </aside>
 
-      {/* MAIN */}
-      <main className="manager-main">
-        <header className="manager-header">
-          <h1>
-            {active === "dashboard"
-              ? "Dashboard"
-              : active.charAt(0).toUpperCase() + active.slice(1)}
-          </h1>
+      {/* MAIN CONTENT */}
+      <main className="simple-main">
+        <header className="simple-header">
+          <div>
+            <h1>
+              {active === "dashboard"
+                ? "Dashboard"
+                : active.charAt(0).toUpperCase() + active.slice(1)}
+            </h1>
 
-          <p className="manager-name">
-            Welcome, <strong>{managerName}</strong>
-          </p>
+            <p className="manager-name">
+              Welcome, <strong>{managerName}</strong>
+            </p>
+          </div>
         </header>
 
-        <div className="manager-content">
+        <div className="simple-content">
           {active === "dashboard" && (
             <>
-              <div className="manager-cards">
-                <div className="manager-card">
+              <div className="simple-cards">
+                <div className="simple-card">
                   <p>Total Staff</p>
                   <h3>—</h3>
                 </div>
-                <div className="manager-card">
+
+                <div className="simple-card">
                   <p>Active Shifts</p>
                   <h3>—</h3>
                 </div>
-                <div className="manager-card">
+
+                <div className="simple-card">
                   <p>Pending Complaints</p>
                   <h3>—</h3>
                 </div>
               </div>
 
-              <div className="manager-panel">
+              <div className="simple-panel">
                 <h2>Recent Activity</h2>
                 <ul>
                   <li>Staff added</li>
@@ -122,13 +137,13 @@ function Managerdashboard() {
           )}
 
           {active === "staff" && <Managestaff />}
+          {active === "add-shifts" && <Addshift />}
           {active === "shifts" && <Manageshift />}
           {active === "assign" && <AssignShift />}
-          {active === "complaints" && <Viewcomplaint />}
         </div>
       </main>
     </div>
   );
 }
 
-export default Managerdashboard;
+export default Dashboard;

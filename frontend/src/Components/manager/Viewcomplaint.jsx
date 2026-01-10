@@ -1,5 +1,5 @@
 import React from "react";
-import "./Dashboard.css"; // reuse same styles
+// import "./Dashboard.css"; // reuse same styles
 
 function Viewcomplaint() {
   const complaints = [
