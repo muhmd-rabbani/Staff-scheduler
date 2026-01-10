@@ -48,6 +48,7 @@ function App() {
         <Route path='/editmanager/:id' element={<Editmanager></Editmanager>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>
         <Route path='/leaverequest'element={<Leaverequest></Leaverequest>}></Route>
+        <Route path='/viewcomplaints'element={<Viewcomplaint></Viewcomplaint>}></Route>
       </Routes>
 
     </>

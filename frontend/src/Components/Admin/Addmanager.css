@@ -1,6 +1,6 @@
 /* Wrapper */
 .manager-wrapper {
-  background-color: #fff;
+  background-color: #00346B;
   border-radius: 16px;
   padding: 20px;
   overflow: hidden;
@@ -38,7 +38,7 @@
 /* Form Fields */
 .manager-field label {
   font-weight: 600;
-  color: #00246B;
+  color: #ffffff;
 }
 
 /* Actions */

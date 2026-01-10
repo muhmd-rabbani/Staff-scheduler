@@ -1,6 +1,6 @@
 :root {
   --primary: #00346B;
-  --light-bg: #CADCFC;
+  --light-bg: #d0d4da;
   --text-dark: #222;
   --text-light: #666;
   --card-bg: #fff;
@@ -26,6 +26,7 @@
   background: var(--primary);
   color: white;
   padding: 20px 10px;
+  flex-shrink: 0;
 }
 
 .simple-logo {
@@ -62,12 +63,31 @@
 .simple-main {
   flex-grow: 1;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* ✅ important */
+}
+
+.simple-header {
+  flex-shrink: 0;
 }
 
 .simple-header h1 {
   font-size: 28px;
   color: var(--text-dark);
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+}
+
+.manager-name {
+  color: var(--text-light);
+}
+
+/* CONTENT AREA (THIS FIXES BLANK PAGE) */
+.simple-content {
+  flex: 1;                 /* ✅ MOST IMPORTANT */
+  overflow-y: auto;        /* ✅ scroll works */
+  padding-top: 20px;
+  padding-right: 10px;
 }
 
 /* DASHBOARD CARDS */
@@ -82,7 +102,6 @@
   padding: 20px;
   border-radius: var(--radius);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  text-align: left;
 }
 
 .simple-card p {

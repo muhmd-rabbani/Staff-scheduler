@@ -1,6 +1,6 @@
 /* Wrapper */
 .leave-wrapper {
-  background-color: #00246B;
+  background-color: #00346B;
   padding: 20px;
   border-radius: 16px;
 }
@@ -21,7 +21,7 @@
 
 /* Table Head */
 .leave-table th {
-  background-color: #00246B;
+  background-color: #00346B;
   color: white;
 }
 

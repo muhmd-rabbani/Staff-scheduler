@@ -28,9 +28,9 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="ds-search-wrap">
+        {/* <div className="ds-search-wrap">
           <input className="ds-search" placeholder="Search..." />
-        </div>
+        </div> */}
 
         <nav className="ds-nav">
           <button

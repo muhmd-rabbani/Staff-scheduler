@@ -10,31 +10,31 @@
 .ds-root {
   display: flex;
   min-height: 100vh;
-  background: #cadcfc;
+  background: #d0d4da;
 }
 
 /* ===== SIDEBAR ===== */
 .ds-sidebar {
   width: 200px;
-  background: #00246B;
+  background: #00346B;
   color: #fff;
   display: flex;
   flex-direction: column;
   padding: 20px;
-position: fixed;        
-  left: 0;                
-  top: 0;                 
-  height: 100vh;          
-
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
   transition: width 0.3s ease;
-  z-index: 1000;          
+  z-index: 1000;
 }
 
+/* Collapsed sidebar width */
 .ds-root.collapsed .ds-sidebar {
   width: 80px;
 }
 
-/* BRAND */
+/* ===== BRAND ===== */
 .ds-brand {
   display: flex;
   align-items: center;
@@ -52,6 +52,16 @@ position: fixed;
   font-weight: 700;
 }
 
+/* Hide brand text on collapse */
+.ds-root.collapsed .brand-text {
+  display: none;
+}
+
+/* Center logo when collapsed */
+.ds-root.collapsed .ds-brand {
+  justify-content: center;
+}
+
 .brand-text span {
   font-size: 12px;
   color: #9ca3af;
@@ -61,10 +71,11 @@ position: fixed;
   font-size: 14px;
 }
 
-/* SEARCH */
+/* ===== SEARCH ===== */
 .ds-search-wrap {
   margin-bottom: 20px;
 }
+
 .ds-search {
   width: 100%;
   padding: 10px 14px;
@@ -75,7 +86,12 @@ position: fixed;
   color: #fff;
 }
 
-/* NAV */
+/* Hide search when collapsed */
+.ds-root.collapsed .ds-search-wrap {
+  display: none;
+}
+
+/* ===== NAV ===== */
 .ds-nav {
   display: flex;
   flex-direction: column;
@@ -104,24 +120,39 @@ position: fixed;
   font-weight: bold;
 }
 
-/* FOOTER */
+/* Hide nav text on collapse (keeps button size) */
+.ds-root.collapsed .nav-item {
+  font-size: 0;
+  padding: 12px;
+  text-align: center;
+}
+
+/* ===== FOOTER ===== */
 .ds-footer {
   font-size: 12px;
   color: #9ca3af;
   margin-top: auto;
 }
 
+/* Hide footer on collapse */
+.ds-root.collapsed .ds-footer {
+  display: none;
+}
+
 /* ===== MAIN ===== */
 .ds-main {
   flex: 1;
   padding: 24px;
-
-  margin-left: 200px;     
+  margin-left: 200px;
   transition: margin-left 0.3s ease;
 }
 
+/* Adjust main content when collapsed */
+.ds-root.collapsed .ds-main {
+  margin-left: 80px;
+}
 
-/* TOP BAR */
+/* ===== TOP BAR ===== */
 .ds-topbar {
   display: flex;
   justify-content: space-between;
@@ -236,7 +267,7 @@ position: fixed;
   border-top: 1px solid #e5e7eb;
 }
 
-/* STATUS */
+/* ===== STATUS ===== */
 .status {
   padding: 4px 10px;
   border-radius: 999px;
@@ -252,4 +283,30 @@ position: fixed;
 .status.closed {
   background: #dcfce7;
   color: #166534;
+}
+.view-btn {
+  background: #00346B;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.view-btn:hover {
+  background: #00224d;
+}
+.view-btn {
+  background: #00346B;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.view-btn:hover {
+  background: #00224d;
 }

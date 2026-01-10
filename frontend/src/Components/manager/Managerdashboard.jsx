@@ -3,40 +3,30 @@ import "./Managerdashboard.css";
 
 import Managestaff from "./Managestaff";
 import Manageshift from "./Manageshift";
-import Addshift from "./Addshift";
+import AssignShift from "./AssignShift";
+import Viewcomplaint from "./Viewcomplaint";
+
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
 
-function Dashboard() {
+function Managerdashboard() {
   const [active, setActive] = useState("dashboard");
   const [managerName, setManagerName] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-  localStorage.clear();
-  navigate('/')
-  
-}
+    localStorage.clear();
+    navigate("/");
+  };
 
   useEffect(() => {
     const fetchManager = async () => {
       try {
         const loginId = localStorage.getItem("loginId");
-        if (!loginId) {
-          alert("Login required");
-          return;
-        }
-
         const res = await api.get(`/Manager/bylogin/${loginId}`);
-
-        // ✅ store only IDs
-        localStorage.setItem("managerId", res.data._id);
-        localStorage.setItem("departmentId", res.data.department);
-
-        // ✅ keep name only in state
         setManagerName(res.data.name);
-      } catch (error) {
-        console.log(error);
-        alert("Failed to load manager data");
+      } catch (err) {
+        console.log(err);
       }
     };
 
@@ -44,79 +34,84 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="simple-container">
-      {/* LEFT SIDEBAR */}
-      <aside className="simple-sidebar">
-        <h2 className="simple-logo">Manager</h2>
+    <div className="manager-container">
+      {/* SIDEBAR */}
+      <aside className="manager-sidebar">
+        <h2 className="manager-logo">Manager</h2>
 
-        <nav className="simple-menu">
+        <nav className="manager-menu">
           <button
             className={active === "dashboard" ? "active" : ""}
             onClick={() => setActive("dashboard")}
           >
             Dashboard
           </button>
+
           <button
             className={active === "staff" ? "active" : ""}
             onClick={() => setActive("staff")}
           >
-            Manage Staff
+            Staffs
           </button>
-          <button
-            className={active === "add-shifts" ? "active" : ""}
-            onClick={() => setActive("add-shifts")}
-          >
-            Add Shift
-          </button>
+
           <button
             className={active === "shifts" ? "active" : ""}
             onClick={() => setActive("shifts")}
           >
-            Manage Shift
+            Shifts
           </button>
+
           <button
-            onClick={handleLogout}>
-            Log out
+            className={active === "assign" ? "active" : ""}
+            onClick={() => setActive("assign")}
+          >
+            Assign Shift
           </button>
+
+          <button
+            className={active === "complaints" ? "active" : ""}
+            onClick={() => setActive("complaints")}
+          >
+            Complaints
+          </button>
+
+          <button onClick={handleLogout}>Log out</button>
         </nav>
       </aside>
 
-      {/* MAIN CONTENT */}
-      <main className="simple-main">
-        <header className="simple-header">
-          <div>
-            <h1>
-              {active === "dashboard"
-                ? "Dashboard"
-                : active.charAt(0).toUpperCase() + active.slice(1)}
-            </h1>
+      {/* MAIN */}
+      <main className="manager-main">
+        <header className="manager-header">
+          <h1>
+            {active === "dashboard"
+              ? "Dashboard"
+              : active.charAt(0).toUpperCase() + active.slice(1)}
+          </h1>
 
-            {/* ✅ Manager name displayed from state */}
-            <p className="manager-name">
-              Welcome, <strong>{managerName}</strong>
-            </p>
-          </div>
+          <p className="manager-name">
+            Welcome, <strong>{managerName}</strong>
+          </p>
         </header>
 
-        <div className="simple-content">
+        <div className="manager-content">
           {active === "dashboard" && (
             <>
-              <div className="simple-cards">
-                <div className="simple-card">
+              <div className="manager-cards">
+                <div className="manager-card">
                   <p>Total Staff</p>
                   <h3>—</h3>
                 </div>
-                <div className="simple-card">
+                <div className="manager-card">
                   <p>Active Shifts</p>
                   <h3>—</h3>
                 </div>
-                <div className="simple-card">
+                <div className="manager-card">
                   <p>Pending Complaints</p>
                   <h3>—</h3>
                 </div>
               </div>
 
-              <div className="simple-panel">
+              <div className="manager-panel">
                 <h2>Recent Activity</h2>
                 <ul>
                   <li>Staff added</li>
@@ -127,12 +122,13 @@ function Dashboard() {
           )}
 
           {active === "staff" && <Managestaff />}
-          {active === "add-shifts" && <Addshift />}
           {active === "shifts" && <Manageshift />}
+          {active === "assign" && <AssignShift />}
+          {active === "complaints" && <Viewcomplaint />}
         </div>
       </main>
     </div>
   );
 }
 
-export default Dashboard;
+export default Managerdashboard;
