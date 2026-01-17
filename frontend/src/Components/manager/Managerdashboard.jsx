@@ -7,6 +7,9 @@ import Addshift from "./Addshift";
 import AssignShift from "./AssignShift";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
+import Requests from "../Admin/Requests";
+import MRequests from "./MRequests";
+import MAttendance from "./MAttendance";
 
 function Dashboard() {
   const [active, setActive] = useState("dashboard");
@@ -66,6 +69,13 @@ function Dashboard() {
           </button>
 
           <button
+            className={active === "Attendance" ? "active" : ""}
+            onClick={() => setActive("Attendance")}
+          >
+            Attendance
+          </button>
+
+          <button
             className={active === "shifts" ? "active" : ""}
             onClick={() => setActive("shifts")}
           >
@@ -84,6 +94,12 @@ function Dashboard() {
             onClick={() => setActive("complaints")}
           >
             Complaints
+          </button>
+          <button
+            className={`nav-item ${active === "Requests" ? "active" : ""}`}
+            onClick={() => setActive("Requests")}
+          >
+            Requests
           </button>
 
           <button onClick={handleLogout}>Log out</button>
@@ -140,6 +156,8 @@ function Dashboard() {
           {active === "add-shifts" && <Addshift />}
           {active === "shifts" && <Manageshift />}
           {active === "assign" && <AssignShift />}
+          {active === "Requests" && <MRequests  />}
+          {active === "Attendance" && <MAttendance/>}
         </div>
       </main>
     </div>

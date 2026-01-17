@@ -5,6 +5,8 @@ import Viewstaff from "./Viewstaff";
 import Viewshift from "./Viewshift";
 import Viewcomplaint from "./Viewcomplaint";
 import { useNavigate } from "react-router-dom";
+import Requests from "./Requests";
+import Attendance from "./Attendance";
 
 function Dashboard() {
   const [active, setActive] = useState("dashboard");
@@ -46,7 +48,12 @@ function Dashboard() {
           >
             Managers
           </button>
-
+          <button
+            className={`nav-item ${active === "Attendance" ? "active" : ""}`}
+            onClick={() => setActive("Attendance")}
+            >
+              Attendance
+          </button>
           <button
             className={`nav-item ${active === "staff" ? "active" : ""}`}
             onClick={() => setActive("staff")}
@@ -66,6 +73,12 @@ function Dashboard() {
             onClick={() => setActive("complaints")}
           >
             Complaints
+          </button>
+          <button
+            className={`nav-item ${active === "Requests" ? "active" : ""}`}
+            onClick={() => setActive("Requests")}
+          >
+            Requests
           </button>
           <button
             className="nav-item"
@@ -156,6 +169,8 @@ function Dashboard() {
           {active === "staff" && <Viewstaff />}
           {active === "shifts" && <Viewshift />}
           {active === "complaints" && <Viewcomplaint />}
+          {active === "Requests" && <Requests />}
+          {active === "Attendance" && <Attendance/>}
         </section>
       </main>
     </div>
